@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb51b06a49ccd324a87b416751ebedb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowCamera
-  target: {fileID: 0}
+  target: {fileID: 1622479649}
   offset: {x: 0, y: 5, z: -10}
   smoothSpeed: 0.125
 --- !u!114 &1423288540
@@ -583,7 +583,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1622479649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1622479647
 PrefabInstance:
@@ -637,9 +637,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Timmy
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 671b6f08f66d67f4fa4ee650ce3fa2e6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1423288543}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
       insertIndex: -1
@@ -659,6 +666,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
   m_PrefabInstance: {fileID: 1622479647}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1622479649 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
+  m_PrefabInstance: {fileID: 1622479647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1622479651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,7 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
-  rotationSpeed: 720
+  rotationSpeed: 120
   gravity: -9.81
   mouseOrbitCamera: {fileID: 0}
   animDamp: 0.05
@@ -952,5 +964,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1622479647}
-  - {fileID: 1423288543}
   - {fileID: 1733821238}
