@@ -7,8 +7,8 @@ public class CameraSwitcher : MonoBehaviour
     private void Start()
     {
         // Desactivar cualquier otra cámara en la escena
-        Camera[] allCameras = FindObjectsOfType<Camera>();
-        foreach (Camera cam in allCameras)
+        var cameras = FindObjectsByType<Camera>(FindObjectsSortMode.None);
+        foreach (Camera cam in cameras)
         {
             if (cam != followCamera)
                 cam.gameObject.SetActive(false);
