@@ -10,19 +10,41 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 posicionInicial;
     private Vector3 posicionObjetivo;
+    private Vector3 posicionAnterior;
     private bool moviendoADerecha = true;
     private bool enMovimiento = false;
+
+    // Para manejar el Character Controller
+    private CharacterController playerController;
+    private bool playerEnPlataforma = false;
 
     void Start()
     {
         // Guardar la posición inicial
         posicionInicial = transform.position;
+        posicionAnterior = transform.position;
 
         // Calcular la posición objetivo (a la derecha)
         posicionObjetivo = posicionInicial + new Vector3(distanciaMovimiento, 0, 0);
 
         // Iniciar la corrutina de movimiento
         StartCoroutine(MoverPlataforma());
+    }
+
+    void LateUpdate()
+    {
+        // Si hay un player en la plataforma, moverlo con ella
+        if (playerEnPlataforma && playerController != null)
+        {
+            // Calcular cuánto se movió la plataforma este frame
+            Vector3 movimientoPlataforma = transform.position - posicionAnterior;
+
+            // Mover al player la misma cantidad
+            playerController.Move(movimientoPlataforma);
+        }
+
+        // Guardar la posición actual para el próximo frame
+        posicionAnterior = transform.position;
     }
 
     IEnumerator MoverPlataforma()
@@ -58,20 +80,56 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    // Hacer que los objetos se muevan con la plataforma
-    private void OnTriggerEnter(Collider other)
+    // Detectar cuando el player entra en la plataforma
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            other.transform.SetParent(transform);
+            CharacterController cc = collision.gameObject.GetComponent<CharacterController>();
+            if (cc != null)
+            {
+                playerController = cc;
+                playerEnPlataforma = true;
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    // Detectar cuando el player sale de la plataforma
+    private void OnCollisionExit(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            other.transform.SetParent(null);
+            playerEnPlataforma = false;
+            playerController = null;
+        }
+    }
+
+    // Mantener la detección mientras el player está en contacto
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Verificar que el player está realmente encima (no tocando los lados)
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                // Si el punto de contacto tiene una normal hacia arriba, está encima
+                if (contact.normal.y > 0.5f)
+                {
+                    if (playerController == null)
+                    {
+                        CharacterController cc = collision.gameObject.GetComponent<CharacterController>();
+                        if (cc != null)
+                        {
+                            playerController = cc;
+                            playerEnPlataforma = true;
+                        }
+                    }
+                    return;
+                }
+            }
+
+            // Si no hay contacto por arriba, el player no está encima
+            playerEnPlataforma = false;
         }
     }
 
@@ -85,5 +143,12 @@ public class MovingPlatform : MonoBehaviour
         Gizmos.DrawLine(inicio, fin);
         Gizmos.DrawWireSphere(inicio, 0.3f);
         Gizmos.DrawWireSphere(fin, 0.3f);
+
+        // Indicador visual si el player está en la plataforma
+        if (Application.isPlaying && playerEnPlataforma)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(transform.position + Vector3.up * 0.5f, Vector3.one * 0.5f);
+        }
     }
 }
