@@ -80,10 +80,7 @@ public class PlayerMovementDebug : MonoBehaviour
         isGroundedBySphere = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
 
         // logs de diagnóstico (una vez por frame)
-        if (logToConsole)
-        {
-            Debug.Log($"[DEBUG] groundCheckPos={groundCheck.position:F3} | controller.isGrounded={isGroundedByController} | CheckSphere={isGroundedBySphere} | velY={velocity.y:F3}");
-        }
+      
 
         // 2) Si alguna detecta suelo lo consideramos grounded
         bool isGrounded = isGroundedByController || isGroundedBySphere;
