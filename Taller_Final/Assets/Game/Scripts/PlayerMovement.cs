@@ -8,7 +8,7 @@ public class PlayerMovementDebug : MonoBehaviour
     public float moveSpeed = 5f;
     public float rotationSpeed = 720f;
 
-    [Header("F√≠sica")]
+    [Header("FÌsica")]
     public float gravity = -9.81f;
     public float jumpForce = 5f;
 
@@ -58,7 +58,7 @@ public class PlayerMovementDebug : MonoBehaviour
 
         if (animator == null)
         {
-            if (logToConsole) Debug.LogWarning("[DEBUG] No se encontr√≥ Animator en el objeto.");
+            if (logToConsole) Debug.LogWarning("[DEBUG] No se encontrÛ Animator en el objeto.");
             disableAnimator = true;
         }
 
@@ -75,15 +75,12 @@ public class PlayerMovementDebug : MonoBehaviour
 
     private void Update()
     {
-        // 1) Detectar suelo (dos m√©todos)
+        // 1) Detectar suelo (dos mÈtodos)
         isGroundedByController = controller.isGrounded;
         isGroundedBySphere = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
 
-        // logs de diagn√≥stico (una vez por frame)
-        if (logToConsole)
-        {
-            Debug.Log($"[DEBUG] groundCheckPos={groundCheck.position:F3} | controller.isGrounded={isGroundedByController} | CheckSphere={isGroundedBySphere} | velY={velocity.y:F3}");
-        }
+        // logs de diagnÛstico (una vez por frame)
+      
 
         // 2) Si alguna detecta suelo lo consideramos grounded
         bool isGrounded = isGroundedByController || isGroundedBySphere;
@@ -91,8 +88,8 @@ public class PlayerMovementDebug : MonoBehaviour
         // 3) Mantener velocidad vertical estable cuando grounded
         if (isGrounded && velocity.y < 0f)
         {
-            velocity.y = -2f; // fuerza peque√±a hacia abajo para "pegar" al suelo
-            // activar/desactivar bools del animator si est√° activo
+            velocity.y = -2f; // fuerza pequeÒa hacia abajo para "pegar" al suelo
+            // activar/desactivar bools del animator si est· activo
             if (!disableAnimator)
             {
                 animator.SetBool(JumpHash, false);
@@ -104,7 +101,7 @@ public class PlayerMovementDebug : MonoBehaviour
         Vector3 input = new Vector3(moveInput.x, 0f, moveInput.y);
         Vector3 moveWorld = transform.right * input.x + transform.forward * input.z;
 
-        // Rotaci√≥n suave si hay input
+        // RotaciÛn suave si hay input
         Vector3 lookDir = new Vector3(moveWorld.x, 0f, moveWorld.z);
         if (lookDir.sqrMagnitude > 0.0001f)
         {
@@ -114,7 +111,7 @@ public class PlayerMovementDebug : MonoBehaviour
 
         controller.Move(moveWorld * moveSpeed * Time.deltaTime);
 
-        // 5) Salto (si estamos grounded por cualquiera de los m√©todos)
+        // 5) Salto (si estamos grounded por cualquiera de los mÈtodos)
         if (isGrounded && jumpPressed)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
@@ -131,7 +128,7 @@ public class PlayerMovementDebug : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        // 7) Enviar parametros de movimiento al animator (si no est√° desactivado)
+        // 7) Enviar parametros de movimiento al animator (si no est· desactivado)
         if (!disableAnimator)
         {
             velXCur = Mathf.Lerp(velXCur, moveInput.x, animDamp);
