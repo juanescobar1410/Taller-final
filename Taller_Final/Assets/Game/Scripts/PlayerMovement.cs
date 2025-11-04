@@ -1,105 +1,158 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementDebug : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 720f; // grados/seg
+    [Header("Movimiento")]
+    public float moveSpeed = 5f;
+    public float rotationSpeed = 720f;
 
-    [Header("Physics")]
-    [SerializeField] private float gravity = -9.81f;
+    [Header("Física")]
+    public float gravity = -9.81f;
+    public float jumpForce = 5f;
 
-    [Header("Optional")]
-    [Tooltip("Si se asigna, el movimiento será relativo a esta cámara (ej: cámara orbital).")]
-    public Camera mouseOrbitCamera;
+    [Header("Ground Check")]
+    public Transform groundCheck;          // asigna un empty en los pies
+    public float groundRadius = 0.16f;
+    public LayerMask groundMask;           // marca la capa del suelo en el inspector
+
+    [Header("Debug")]
+    public bool logToConsole = true;       // activa mensajes en consola
+    public bool disableAnimator = false;   // si true, desactiva el Animator para probar
+    public bool drawGizmos = true;
 
     private CharacterController controller;
-    private Animator anim;
+    private Animator animator;
 
-    // Nuevo Input System: valor actual de la acción "Move"
-    private Vector2 moveInput;           // x: izq-der, y: adelante-atrás
-    private Vector3 velocity;            // para gravedad
+    // input system
+    private Vector2 moveInput;
+    private bool jumpPressed;
 
-    // Hash para parámetros del Animator (evita typos y es más rápido)
+    private Vector3 velocity;
+    private bool isGroundedByController;
+    private bool isGroundedBySphere;
+
+    // animator hashes (si los usas)
     private static readonly int VelX = Animator.StringToHash("velX");
     private static readonly int VelY = Animator.StringToHash("velY");
+    private static readonly int JumpHash = Animator.StringToHash("Jump");
+    private static readonly int LandingHash = Animator.StringToHash("Landing");
 
-    // Suavizado para el Blend Tree
-    [SerializeField] private float animDamp = 0.05f;
-    private float velXCur, velYCur;      // internos para damping
+    private float velXCur, velYCur;
+    [SerializeField] private float animDamp = 0.08f;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+
+        if (groundCheck == null)
+        {
+            // crear groundCheck por defecto justo encima de los pies
+            GameObject go = new GameObject("GroundCheck");
+            go.transform.SetParent(transform);
+            go.transform.localPosition = new Vector3(0f, -controller.height * 0.5f + 0.1f, 0f);
+            groundCheck = go.transform;
+        }
+
+        if (animator == null)
+        {
+            if (logToConsole) Debug.LogWarning("[DEBUG] No se encontró Animator en el objeto.");
+            disableAnimator = true;
+        }
+
+        if (disableAnimator && animator != null)
+            animator.enabled = false;
     }
 
-    // ====== NUEVO INPUT SYSTEM ======
-    // Este callback lo invoca PlayerInput cuando la acción "Move" cambia.
-    // En el componente PlayerInput, asigna:
-    //   - Actions: tu InputActionAsset
-    //   - Behavior: Invoke Unity Events
-    //   - Events > Move: arrastra el Player y selecciona PlayerMovement.OnMove
-    public void OnMove(InputAction.CallbackContext ctx)
+    // Input System callbacks
+    public void OnMove(InputAction.CallbackContext ctx) => moveInput = ctx.ReadValue<Vector2>();
+    public void OnJump(InputAction.CallbackContext ctx)
     {
-        moveInput = ctx.ReadValue<Vector2>(); // (-1..1 , -1..1)
+        if (ctx.performed) jumpPressed = true;
     }
 
     private void Update()
     {
-        // 1) Calcular dirección de movimiento (relativa a cámara si existe)
-        Vector3 input = new Vector3(moveInput.x, 0f, moveInput.y); // x=strafe, y=forward
+        // 1) Detectar suelo (dos métodos)
+        isGroundedByController = controller.isGrounded;
+        isGroundedBySphere = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
 
-        Vector3 moveWorld;
-        if (mouseOrbitCamera != null && mouseOrbitCamera.gameObject.activeInHierarchy)
+        // logs de diagnóstico (una vez por frame)
+        if (logToConsole)
         {
-            // plano XZ de la cámara
-            Vector3 camFwd = mouseOrbitCamera.transform.forward;
-            camFwd.y = 0f;
-            camFwd.Normalize();
-
-            Vector3 camRight = mouseOrbitCamera.transform.right;
-            camRight.y = 0f;
-            camRight.Normalize();
-
-            moveWorld = camRight * input.x + camFwd * input.z;
-        }
-        else
-        {
-            // sin cámara: usar el forward del personaje
-            moveWorld = transform.right * input.x + transform.forward * input.z;
+            Debug.Log($"[DEBUG] groundCheckPos={groundCheck.position:F3} | controller.isGrounded={isGroundedByController} | CheckSphere={isGroundedBySphere} | velY={velocity.y:F3}");
         }
 
-        // 2) Rotar hacia la dirección de avance si hay input
+        // 2) Si alguna detecta suelo lo consideramos grounded
+        bool isGrounded = isGroundedByController || isGroundedBySphere;
+
+        // 3) Mantener velocidad vertical estable cuando grounded
+        if (isGrounded && velocity.y < 0f)
+        {
+            velocity.y = -2f; // fuerza pequeña hacia abajo para "pegar" al suelo
+            // activar/desactivar bools del animator si está activo
+            if (!disableAnimator)
+            {
+                animator.SetBool(JumpHash, false);
+                animator.SetBool(LandingHash, true);
+            }
+        }
+
+        // 4) Movimiento horizontal (igual que antes)
+        Vector3 input = new Vector3(moveInput.x, 0f, moveInput.y);
+        Vector3 moveWorld = transform.right * input.x + transform.forward * input.z;
+
+        // Rotación suave si hay input
         Vector3 lookDir = new Vector3(moveWorld.x, 0f, moveWorld.z);
         if (lookDir.sqrMagnitude > 0.0001f)
         {
-            Quaternion targetRot = Quaternion.LookRotation(lookDir, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+            Quaternion target = Quaternion.LookRotation(lookDir, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, target, rotationSpeed * Time.deltaTime);
         }
 
-        // 3) Mover con CharacterController
-        Vector3 horizontal = moveWorld * moveSpeed;
-        controller.Move(horizontal * Time.deltaTime);
+        controller.Move(moveWorld * moveSpeed * Time.deltaTime);
 
-        // 4) Gravedad
-        if (controller.isGrounded && velocity.y < 0f)
-            velocity.y = -2f; // pequeño empuje hacia el suelo para mantener grounded
+        // 5) Salto (si estamos grounded por cualquiera de los métodos)
+        if (isGrounded && jumpPressed)
+        {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            jumpPressed = false;
+            if (!disableAnimator)
+            {
+                animator.SetBool(JumpHash, true);
+                animator.SetBool(LandingHash, false);
+            }
+            if (logToConsole) Debug.Log("[DEBUG] Saltando: velocity.y set");
+        }
+
+        // 6) Gravedad y movimiento vertical
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        // 5) Enviar parámetros al Animator (Blend Tree 2D Freeform: velX, velY)
-        // velX/velY en el BlendTree deben ser el input local (x,y) del jugador.
-        // Usamos damping para que el punto rojo del Blend Tree se mueva suave.
-        velXCur = Mathf.SmoothDamp(velXCur, moveInput.x, ref velXCur, animDamp);
-        velYCur = Mathf.SmoothDamp(velYCur, moveInput.y, ref velYCur, animDamp);
-        anim.SetFloat(VelX, velXCur);
-        anim.SetFloat(VelY, velYCur);
+        // 7) Enviar parametros de movimiento al animator (si no está desactivado)
+        if (!disableAnimator)
+        {
+            velXCur = Mathf.Lerp(velXCur, moveInput.x, animDamp);
+            velYCur = Mathf.Lerp(velYCur, moveInput.y, animDamp);
+            animator.SetFloat(VelX, velXCur);
+            animator.SetFloat(VelY, velYCur);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!drawGizmos || groundCheck == null) return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+
+        // dibujar "bottom" del CharacterController para referencia
+        if (controller != null)
+        {
+            Gizmos.color = Color.cyan;
+            Vector3 bottomCenter = transform.position + controller.center - Vector3.up * (controller.height * 0.5f - controller.radius);
+            Gizmos.DrawWireSphere(bottomCenter, controller.radius);
+        }
     }
 }
-
-
