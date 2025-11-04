@@ -16,7 +16,7 @@ public class PlayerRespawn : MonoBehaviour
     void Update()
     {
         // Si el jugador cae por debajo de cierto punto, reaparece
-        if (transform.position.y < -10f)
+        if (transform.position.y < -25f)
         {
             Respawn();
         }
