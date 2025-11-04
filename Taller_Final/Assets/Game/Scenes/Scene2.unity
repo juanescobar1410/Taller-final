@@ -1781,6 +1781,18 @@ PrefabInstance:
       propertyPath: m_FOVAxisMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2956615808079698271, guid: 9b1ab9062554c1f4485a7abce0299a64, type: 3}
+      propertyPath: jumpForce
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956615808079698271, guid: 9b1ab9062554c1f4485a7abce0299a64, type: 3}
+      propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956615808079698271, guid: 9b1ab9062554c1f4485a7abce0299a64, type: 3}
+      propertyPath: rotationSpeed
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6108767666744267925, guid: 9b1ab9062554c1f4485a7abce0299a64, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.54
@@ -6024,7 +6036,9 @@ MonoBehaviour:
   tiempoAntesDeDesaparecer: 2
   tiempoParaReaparecer: 3
   usarTransparencia: 1
-  tiempoTransparencia: 1
+  velocidadFade: 2
+  usarEscala: 1
+  velocidadEscala: 3
   alturaDetecion: 0.2
 --- !u!4 &942083076 stripped
 Transform:
@@ -6393,7 +6407,9 @@ MonoBehaviour:
   tiempoAntesDeDesaparecer: 2
   tiempoParaReaparecer: 3
   usarTransparencia: 1
-  tiempoTransparencia: 1
+  velocidadFade: 2
+  usarEscala: 1
+  velocidadEscala: 3
   alturaDetecion: 0.2
 --- !u!1 &1000026226
 GameObject:
@@ -10222,7 +10238,9 @@ MonoBehaviour:
   tiempoAntesDeDesaparecer: 2
   tiempoParaReaparecer: 3
   usarTransparencia: 1
-  tiempoTransparencia: 1
+  velocidadFade: 2
+  usarEscala: 1
+  velocidadEscala: 3
   alturaDetecion: 0.2
 --- !u!1 &1733095962
 GameObject:
@@ -10588,7 +10606,9 @@ MonoBehaviour:
   tiempoAntesDeDesaparecer: 2
   tiempoParaReaparecer: 3
   usarTransparencia: 1
-  tiempoTransparencia: 1
+  velocidadFade: 2
+  usarEscala: 1
+  velocidadEscala: 3
   alturaDetecion: 0.2
 --- !u!1 &1800970183
 GameObject:
@@ -11584,7 +11604,9 @@ MonoBehaviour:
   tiempoAntesDeDesaparecer: 2
   tiempoParaReaparecer: 3
   usarTransparencia: 1
-  tiempoTransparencia: 1
+  velocidadFade: 2
+  usarEscala: 1
+  velocidadEscala: 3
   alturaDetecion: 0.2
 --- !u!1 &2045706324 stripped
 GameObject:
@@ -11818,7 +11840,9 @@ MonoBehaviour:
   tiempoAntesDeDesaparecer: 2
   tiempoParaReaparecer: 3
   usarTransparencia: 1
-  tiempoTransparencia: 1
+  velocidadFade: 2
+  usarEscala: 1
+  velocidadEscala: 3
   alturaDetecion: 0.2
 --- !u!1 &2079180141
 GameObject:
