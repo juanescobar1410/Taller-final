@@ -97,3 +97,5 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+Taller_Final/ProjectSettings/ShaderGraphSettings.asset
+Taller_Final/Assets/Game/Scenes/Scene1.unity
