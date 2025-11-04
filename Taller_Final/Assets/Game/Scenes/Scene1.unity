@@ -3246,15 +3246,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7879238690498536592, guid: 971c3e3e3ebb1c74489ee8322556d6bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.61326
+      value: 42.99
       objectReference: {fileID: 0}
     - target: {fileID: 7879238690498536592, guid: 971c3e3e3ebb1c74489ee8322556d6bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50.621914
+      value: 48.5
       objectReference: {fileID: 0}
     - target: {fileID: 7879238690498536592, guid: 971c3e3e3ebb1c74489ee8322556d6bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 78.87563
+      value: 68.87
       objectReference: {fileID: 0}
     - target: {fileID: 7879238690498536592, guid: 971c3e3e3ebb1c74489ee8322556d6bf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10482,10 +10482,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud_05
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: c37b1ccfbc7ed274eb99f9d40e72c4e6, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c37b1ccfbc7ed274eb99f9d40e72c4e6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.033333335
@@ -11235,6 +11231,73 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 5df7daeab707230409664c66ca47c5ad, type: 3}
+--- !u!1 &805894483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805894486}
+  - component: {fileID: 805894485}
+  - component: {fileID: 805894484}
+  m_Layer: 0
+  m_Name: ChangeScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &805894484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805894483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 280403723e67a7b46bd84795f5c81e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CambioDeEscena
+  Scene2: Scene2
+--- !u!65 &805894485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805894483}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &805894486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805894483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -49.78872, y: 154.97, z: -57.8504}
+  m_LocalScale: {x: 35.202644, y: 0.6818, z: 37.131435}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &805944072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31178,10 +31241,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud_06
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: c2391e8a6bdf5424194b61e41952a40a, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c2391e8a6bdf5424194b61e41952a40a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.06959667
@@ -38206,11 +38265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38243,10 +38302,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
       propertyPath: m_Name
       value: Timmy
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 0dd7d9a985890df43a292ff2e387817a, type: 3}
       propertyPath: m_Controller
@@ -38300,8 +38355,15 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 120
   gravity: -9.81
-  jumpHeight: 2
-  mouseOrbitCamera: {fileID: 0}
+  jumpForce: 5
+  groundCheck: {fileID: 0}
+  groundRadius: 0.16
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  logToConsole: 1
+  disableAnimator: 0
+  drawGizmos: 1
   animDamp: 0.05
 --- !u!143 &1622479652
 CharacterController:
@@ -38401,7 +38463,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1622479651}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_TargetAssemblyTypeName: PlayerMovementDebug, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -39565,10 +39627,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: c2391e8a6bdf5424194b61e41952a40a, type: 3}
       propertyPath: m_Name
       value: Cloud_06
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: c2391e8a6bdf5424194b61e41952a40a, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c2391e8a6bdf5424194b61e41952a40a, type: 3}
       propertyPath: m_LocalScale.x
@@ -51457,10 +51515,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud_04
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 420bde364644a314396dc8ed24ee99d6, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 420bde364644a314396dc8ed24ee99d6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.033333335
@@ -51545,3 +51599,4 @@ SceneRoots:
   - {fileID: 1440489952}
   - {fileID: 1463905023}
   - {fileID: 2036893906}
+  - {fileID: 805894486}
