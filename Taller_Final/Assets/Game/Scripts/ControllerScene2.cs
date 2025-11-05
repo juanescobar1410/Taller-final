@@ -1,12 +1,15 @@
-using UnityEngine;
-using UnityEngine.UI;
+using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem.iOS;
+using UnityEngine.UI;
 
-public class ControllerScene : MonoBehaviour
+public class ControllerScene2 : MonoBehaviour
 {
     [Header("UI en juego")]
     public TextMeshProUGUI textoScore;
-    public TextMeshProUGUI textoItem;
+    
 
     [Header("Panel Final")]
     public GameObject panelScoreFinal;
@@ -39,19 +42,20 @@ public class ControllerScene : MonoBehaviour
             tiempoEscena2 += Time.deltaTime;
         }
 
-        if (textoScore != null)
-            textoScore.text = GameManager.Instance.Score.ToString();
-
-        if (textoItem != null)
-            textoItem.text = GameManager.Instance.ItemsCount.ToString();
+        textoScore.text = GameManager.Instance.Score.ToString();
+        textoCaidas.text = GameManager.Instance.FallsCount.ToString();
 
 
-        //if (!panelMostrado && GameManager.Instance.ItemsCount >= totalItemsEnEscena)
-        //{
-        //    MostrarPanelFinal();
-        //}
+
+
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            MostrarPanelFinal();
+        }
+    }
     void MostrarPanelFinal()
     {
         panelMostrado = true;

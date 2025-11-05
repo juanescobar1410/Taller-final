@@ -12,4 +12,13 @@ public class CambioDeEscena : MonoBehaviour
             SceneManager.LoadScene(Scene2);
         }
     }
+
+
+    public void LoaderScenes(string nameScene)
+    {
+        SceneManager.LoadScene(nameScene);
+    }
+
+
+
 }
