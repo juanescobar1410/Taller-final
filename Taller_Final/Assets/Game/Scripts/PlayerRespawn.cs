@@ -1,7 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
+
+
+    //public TextMeshProUGUI ContadorCaidas;
+   
     private Vector3 lastCheckpointPosition;
     private CharacterController controller;
 
@@ -45,7 +50,11 @@ public class PlayerRespawn : MonoBehaviour
         {
             GameManager.Instance.AddFall();
         }
-
+        //ContadorCaidas.text = GameManager.Instance.FallsCount.ToString();
         Debug.Log("Jugador reapareció en el último checkpoint");
     }
+
+
+
+
 }
