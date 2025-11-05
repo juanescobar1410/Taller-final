@@ -52,4 +52,16 @@ public class GameManager : MonoBehaviour
     {
         itemsCount++;
     }
+
+    private int fallsCount = 0; 
+
+    public int FallsCount => fallsCount; 
+
+    public void AddFall()
+    {
+        fallsCount++;
+
+        Debug.Log("[GameManager] Caída registrada. Total caídas: " + fallsCount);
+    }
+
 }

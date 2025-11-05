@@ -8,14 +8,11 @@ public class PlayerRespawn : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
-        // Guarda la posición inicial como el primer checkpoint
         lastCheckpointPosition = transform.position;
     }
 
     void Update()
     {
-        // Si el jugador cae por debajo de cierto punto, reaparece
         if (transform.position.y < -25f)
         {
             Respawn();
@@ -24,18 +21,15 @@ public class PlayerRespawn : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Detecta si toca un checkpoint
         if (other.CompareTag("Checkpoint"))
         {
-            // Guarda la posición de respawn
             lastCheckpointPosition = other.transform.position;
             Debug.Log("Checkpoint actualizado: " + lastCheckpointPosition);
 
-            // Busca si el checkpoint tiene un sistema de partículas de fuego
             ParticleSystem fuego = other.GetComponentInChildren<ParticleSystem>();
             if (fuego != null && !fuego.isPlaying)
             {
-                fuego.Play(); // Enciende las partículas si aún no lo estaban
+                fuego.Play();
                 Debug.Log("Partículas del checkpoint activadas");
             }
         }
@@ -43,10 +37,14 @@ public class PlayerRespawn : MonoBehaviour
 
     void Respawn()
     {
-        // Desactiva temporalmente el CharacterController para moverlo sin errores
         controller.enabled = false;
         transform.position = lastCheckpointPosition;
         controller.enabled = true;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddFall();
+        }
 
         Debug.Log("Jugador reapareció en el último checkpoint");
     }
