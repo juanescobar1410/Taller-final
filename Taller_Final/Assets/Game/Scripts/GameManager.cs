@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public float GlobalTime { get => globalTime; set => globalTime = value; }
     public int Score { get => score; set => score = value; }
     public int ItemsCount { get => itemsCount; set => itemsCount = value; }
+    public int FallsCount { get => fallsCount; set => fallsCount = value; }
+
+    private int fallsCount = 0;
 
     void Awake()
     {
@@ -53,9 +56,8 @@ public class GameManager : MonoBehaviour
         itemsCount++;
     }
 
-    private int fallsCount = 0; 
-
-    public int FallsCount => fallsCount; 
+    
+ 
 
     public void AddFall()
     {
