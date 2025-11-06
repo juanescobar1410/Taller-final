@@ -3,13 +3,14 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.iOS;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ControllerScene2 : MonoBehaviour
 {
     [Header("UI en juego")]
     public TextMeshProUGUI textoScore;
-
+    public TextMeshProUGUI txtCaidas;
     public GameObject CuboInvisible;
     [Header("Panel Final")]
     public GameObject panelScoreFinal;
@@ -29,8 +30,8 @@ public class ControllerScene2 : MonoBehaviour
     {
         Debug.Log("El tiempo de la escena 1 " + GameManager.Instance.GlobalTime.ToString());
 
-        if (panelScoreFinal != null)
-            panelScoreFinal.SetActive(false);
+        //if (panelScoreFinal != null)
+        //    panelScoreFinal.SetActive(false);
 
     }
 
@@ -43,7 +44,7 @@ public class ControllerScene2 : MonoBehaviour
         }
 
         textoScore.text = GameManager.Instance.Score.ToString();
-        textoCaidas.text = GameManager.Instance.FallsCount.ToString();
+        txtCaidas.text = GameManager.Instance.FallsCount.ToString();
 
 
 
@@ -52,7 +53,13 @@ public class ControllerScene2 : MonoBehaviour
     }
 
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            MostrarPanelFinal();
+        }
+    }
     void MostrarPanelFinal()
     {
         panelMostrado = true;
