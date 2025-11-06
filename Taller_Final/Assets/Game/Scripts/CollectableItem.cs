@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class CollectableItem : MonoBehaviour
 {
-    public enum ItemType { Cruz, Dianmita }  
+    public enum ItemType { Cruz, Dinamita }  
     public ItemType itemType;
     public int itemValue = 0;
     

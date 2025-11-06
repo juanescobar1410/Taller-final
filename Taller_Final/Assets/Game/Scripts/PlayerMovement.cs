@@ -73,7 +73,7 @@ public class PlayerMovementDebug : MonoBehaviour
         if (ctx.performed) jumpPressed = true;
     }
 
-    private void Update()
+    private void  FixedUpdate()
     {
         // 1) Detectar suelo (dos métodos)
         isGroundedByController = controller.isGrounded;
