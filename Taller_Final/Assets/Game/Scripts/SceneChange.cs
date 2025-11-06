@@ -3,8 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class CambioDeEscena : MonoBehaviour
 {
-    [SerializeField] private string Scene2 = "Escena2"; 
-
+    private string Scene2;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -20,5 +19,6 @@ public class CambioDeEscena : MonoBehaviour
     }
 
 
+   
 
 }

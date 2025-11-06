@@ -9,8 +9,8 @@ public class ControllerScene2 : MonoBehaviour
 {
     [Header("UI en juego")]
     public TextMeshProUGUI textoScore;
-    
 
+    public GameObject CuboInvisible;
     [Header("Panel Final")]
     public GameObject panelScoreFinal;
     public TextMeshProUGUI textoScoreFinal;
@@ -48,14 +48,11 @@ public class ControllerScene2 : MonoBehaviour
 
 
 
+
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            MostrarPanelFinal();
-        }
-    }
+
+
+   
     void MostrarPanelFinal()
     {
         panelMostrado = true;
@@ -98,29 +95,5 @@ public class ControllerScene2 : MonoBehaviour
 
     }
 
-    //void ReiniciarEscena()
-    //{
-    //    Time.timeScale = 1f;
-
-
-    //    GameManager.Instance.GlobalTime = 0f;
-    //    GameManager.Instance.Score = 0;
-    //    GameManager.Instance.ItemsCount = 0;
-
-    //    UnityEngine.SceneManagement.SceneManager.LoadScene(
-    //        UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
-    //    );
-    //}
-
-    //void VolverAlMenu()
-    //{
-    //    Time.timeScale = 1f;
-
-
-    //    GameManager.Instance.GlobalTime = 0f;
-    //    GameManager.Instance.Score = 0;
-    //    GameManager.Instance.ItemsCount = 0;
-
-    //    UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    //}
+    
 }
