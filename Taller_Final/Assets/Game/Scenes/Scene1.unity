@@ -39396,9 +39396,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 247385041864541900, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -219
+      objectReference: {fileID: 0}
+    - target: {fileID: 247385041864541900, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 444733773905144704, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224089065012999328, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_text
+      value: 00
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260929767073106888, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260929767073106888, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.000087
       objectReference: {fileID: 0}
     - target: {fileID: 4131450325184488871, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_Pivot.x
@@ -39480,9 +39500,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7094747761034527579, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_text
+      value: '00 '
+      objectReference: {fileID: 0}
     - target: {fileID: 7701083240640798674, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_Name
       value: PanelTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005491379126266017, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 180.99998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005491379126266017, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.000087
       objectReference: {fileID: 0}
     - target: {fileID: 8697236680384172286, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_Name

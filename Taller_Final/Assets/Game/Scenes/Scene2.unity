@@ -53887,9 +53887,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 588020696416345619, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 218
+      objectReference: {fileID: 0}
     - target: {fileID: 1298000358589314801, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 161
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 4131450325184488871, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_Pivot.x
@@ -53971,6 +53975,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4343830481445491155, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -107
+      objectReference: {fileID: 0}
     - target: {fileID: 4535119186541341485, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -707
@@ -53982,6 +53990,10 @@ PrefabInstance:
     - target: {fileID: 7701083240640798674, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_Name
       value: PanelTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8498288702550861305, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 8697236680384172286, guid: 2829e4bf2768a564d95033ccd0da6ca9, type: 3}
       propertyPath: m_Name
