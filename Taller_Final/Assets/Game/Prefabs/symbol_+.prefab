@@ -169,6 +169,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollectableItem
   itemType: 0
   itemValue: 2
+  cruzSound: {fileID: 8300000, guid: 08adfa3f01f8cbb4dbd0df69d2619166, type: 3}
+  dinamitaSound: {fileID: 0}
+  soundVolume: 1
 --- !u!54 &2272944248701794201
 Rigidbody:
   m_ObjectHideFlags: 0
