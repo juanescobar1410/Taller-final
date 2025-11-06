@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class CambioDeEscena : MonoBehaviour
 {
-    private string Scene2;
+    private string Scene2 = "Scene2";
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
