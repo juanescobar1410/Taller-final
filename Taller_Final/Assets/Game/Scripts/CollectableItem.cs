@@ -35,9 +35,23 @@ public class CollectableItem : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddScore(itemValue);
-            GameManager.Instance.AddItem();
+            switch (itemType)
+            {
+                case ItemType.Cruz:
+                    GameManager.Instance.AddScore(itemValue);
+                    
+                    break;
+
+                case ItemType.Dinamita:
+                    GameManager.Instance.AddScore(itemValue);
+                    GameManager.Instance.AddItem();
+                    break;
+            }
+            
         }
+
+        
+        
 
         Destroy(gameObject);
     }

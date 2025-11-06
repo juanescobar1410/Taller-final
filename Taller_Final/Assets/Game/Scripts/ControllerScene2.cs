@@ -11,11 +11,13 @@ public class ControllerScene2 : MonoBehaviour
     [Header("UI en juego")]
     public TextMeshProUGUI textoScore;
     public TextMeshProUGUI txtCaidas;
-    public GameObject CuboInvisible;
+
+    
     [Header("Panel Final")]
     public GameObject panelScoreFinal;
     public TextMeshProUGUI textoScoreFinal;
     public TextMeshProUGUI textoCaidas;
+    public TextMeshProUGUI textoErrores;
     public TextMeshProUGUI textoTiempoFinal; // NUEVO: Para mostrar el tiempo
     //public Button botonReiniciar;
     //public Button botonMenu;
@@ -73,15 +75,18 @@ public class ControllerScene2 : MonoBehaviour
 
 
             if (textoScoreFinal != null)
-                textoScoreFinal.text = "Score: " + GameManager.Instance.Score.ToString();
+                textoScoreFinal.text = GameManager.Instance.Score.ToString();
 
-            if(textoCaidas != null)
-                textoCaidas.text = "Caidas: " + GameManager.Instance.FallsCount.ToString();
+            if (textoScoreFinal != null)
+               textoErrores.text =  GameManager.Instance.ItemsCount.ToString(); 
+
+            if (textoCaidas != null)
+                textoCaidas.text =  GameManager.Instance.FallsCount.ToString();
 
             if (textoTiempoFinal != null)
             {
                 float tiempoTotal = GameManager.Instance.GlobalTime;
-                textoTiempoFinal.text = "Tiempo: " + FormatearTiempo(tiempoTotal);
+                textoTiempoFinal.text = FormatearTiempo(tiempoTotal);
             }
 
 
